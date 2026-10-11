@@ -4,5 +4,5 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   //lädt die Tokens global in die gesamte App
-  css: ['~/tokens/tokens.css']
+  css: ['~~/tokens/tokens.css']
 })
