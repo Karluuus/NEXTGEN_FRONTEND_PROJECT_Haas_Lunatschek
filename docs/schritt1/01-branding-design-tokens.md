@@ -10,11 +10,11 @@ PineDev versteht sich als ressourcenschonender, fokussierter Begleiter für die 
 Die Farbpalette wurde gezielt auf maximale Lesbarkeit und strikte Barrierefreiheit ausgelegt. Alle Text-Hintergrund-Paare wurden mit dem *WebAIM Contrast Checker* gemäß WCAG 2.1 (Mindestkontrast 4.5:1 für regulären Fließtext, 3:1 für UI-Elemente und Großtext) überprüft und zertifiziert:
 
 * **Haupttext (`--color-text-primary` auf `--color-surface-page`):**  
-  Tiefstes Waldschwarzgrün `#052E16` (Pine 950) auf beruhigendem Off-White/Mint `#F0FDF4` (Pine 50) erreicht ein außergewöhnlich hohes Kontrastverhältnis von **16.8:1**. Damit wird die strengste Anforderung der WCAG AAA (7:1) mühelos übertroffen, was ermüdungsfreies Lesen bei direktem Lichteinfall in Konferenzfoyers garantiert.
+  Tiefstes Waldschwarzgrün `#052E16` (Pine 950) auf beruhigendem Off-White/Mint `#F0FDF4` (Pine 50) erreicht ein außergewöhnlich hohes Kontrastverhältnis von **14.23:1**. Damit wird die strengste Anforderung der WCAG AAA (7:1) mühelos übertroffen, was ermüdungsfreies Lesen bei direktem Lichteinfall in Konferenzfoyers garantiert.
 * **Sekundärtext (`--color-text-secondary` auf `--color-surface-page`):**  
-  Waldgrün `#166534` (Pine 800) auf `#F0FDF4` (Pine 50) erreicht ein Kontrastverhältnis von **6.54:1** (Kriterium WCAG AA für regulären Fließtext bestanden).
+  Waldgrün `#166534` (Pine 800) auf `#F0FDF4` (Pine 50) erreicht ein Kontrastverhältnis von **6.81:1** (Kriterium WCAG AA für regulären Fließtext bestanden).
 * **Interaktive Buttons (`--color-text-inverse` auf `--color-interactive-primary`):**  
-  Weißer Text `#FFFFFF` auf Waldgrün `#166534` erzielt ein Kontrastverhältnis von **6.78:1** (WCAG AA und AAA für Fließtext bestanden).
+  Weißer Text `#FFFFFF` auf Waldgrün `#166534` erzielt ein Kontrastverhältnis von **7.13:1** (WCAG AA und AAA für Fließtext bestanden).
 * **Fokus-Indikator (`--color-interactive-focus`):**  
   Ein bernsteinfarbener Amber-Farbton `#F59E0B` hebt Tastatur-Fokus-Zustände deutlich von der grünen Umgebung ab und unterstützt barrierefreie Tastaturnavigation.
 
