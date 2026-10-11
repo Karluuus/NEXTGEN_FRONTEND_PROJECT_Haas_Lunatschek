@@ -54,7 +54,7 @@ Für die Frontend-Konferenzplattform „FrontendNow“ benötigen wir auf Basis 
 
 ### 1. Layout-Schicht (`layouts/`)
 
-- `layouts/default.vue`: Grundgerüst mit Header, Navigation, Inhaltsbereich und Footer.
+- `app/layouts/default.vue`: Grundgerüst mit Header, Navigation, Inhaltsbereich und Footer.
 
 ### 2. Base / UI-Schicht (`components/ui/`)
 
