@@ -11,6 +11,6 @@ export default defineNuxtConfig({
 
     "/sessions/**": { swr: 60 },
 
-    "/mein-programm": { ssr: false },
+    "/schedule": { ssr: false },
   },
 });
