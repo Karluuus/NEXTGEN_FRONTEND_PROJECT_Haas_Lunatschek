@@ -89,7 +89,10 @@
   border-radius: 6px;
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-sm);
-  transition: all 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .nav-link:hover {
