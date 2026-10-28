@@ -1,36 +1,41 @@
 <!-- app/layouts/default.vue -->
 <template>
   <div class="layout-container">
+    <!-- Header spannt über die volle Bildschirmbreite -->
     <header class="header">
-      <div class="header-brand">
-        <NuxtLink to="/" class="brand-link">
-          <h1 class="brand-title">FrontendNow 2026</h1>
-        </NuxtLink>
-        <p class="brand-sub">Plattform von PineDev gmbh & co. kg</p>
-      </div>
+      <div class="header-inner">
+        <div class="header-brand">
+          <NuxtLink to="/" class="brand-link">
+            <h1 class="brand-title">FrontendNow 2026</h1>
+          </NuxtLink>
+          <p class="brand-sub">Plattform von PineDev gmbh & co. kg</p>
+        </div>
 
-      <nav class="nav" aria-label="Hauptnavigation">
-        <NuxtLink to="/" class="nav-link">Programm</NuxtLink>
-        <NuxtLink to="/speakers" class="nav-link">Speaker</NuxtLink>
-        <NuxtLink to="/schedule" class="nav-link">Mein Programm</NuxtLink>
-      </nav>
+        <nav class="nav" aria-label="Hauptnavigation">
+          <NuxtLink to="/" class="nav-link">Programm</NuxtLink>
+          <NuxtLink to="/speakers" class="nav-link">Speaker</NuxtLink>
+          <NuxtLink to="/schedule" class="nav-link">Mein Programm</NuxtLink>
+        </nav>
+      </div>
     </header>
 
+    <!-- Zentraler Inhaltsbereich mit festem Sicherheitsabstand nach unten -->
     <main class="main-content">
       <slot />
     </main>
 
+    <!-- Footer spannt über die volle Bildschirmbreite -->
     <footer class="footer">
-      <p>© 2026 PineDev gmbh & co. kg — FrontendNow Konferenzbegleiter</p>
+      <div class="footer-inner">
+        <p>© 2026 PineDev gmbh & co. kg — FrontendNow Konferenzbegleiter</p>
+      </div>
     </footer>
   </div>
 </template>
 
 <style scoped>
-/* Box-Sizing und 100vh ohne unnötigen Scrollbalken */
 .layout-container {
   box-sizing: border-box;
-  padding: var(--layout-page-padding, 1.5rem);
   background-color: var(--color-surface-page);
   min-height: 100vh;
   color: var(--color-text-primary);
@@ -39,16 +44,17 @@
   flex-direction: column;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* 1. Header über die volle Bildschirmbreite mit durchgehender Linie */
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background-color: var(--color-surface-page);
 }
 
-.header {
-  border-bottom: 1px solid var(--color-border-subtle);
-  padding-bottom: var(--space-4);
-  margin-bottom: var(--space-6);
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-6);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -79,7 +85,6 @@
   gap: var(--space-2);
 }
 
-/* Nav-Links jetzt deutlich als Buttons/Pills erkennbar */
 .nav-link {
   text-decoration: none;
   padding: var(--space-2) var(--space-3);
@@ -100,7 +105,6 @@
   border-color: var(--color-interactive-primary);
 }
 
-/* Aktiver Tab wird optisch hervorgehoben */
 .nav-link.router-link-exact-active,
 .nav-link.router-link-active:not([href="/"]) {
   background-color: var(--color-interactive-primary);
@@ -108,17 +112,33 @@
   color: var(--color-text-inverse);
 }
 
+/* 2. Hauptinhalt zentriert und mit ausreichend Abstand zum Footer */
 .main-content {
-  flex: 1; /* Dehnt den Inhalt aus, damit der Footer unten bleibt */
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-6) var(--space-12) var(--space-6);
 }
 
+/* 3. Footer über die volle Bildschirmbreite mit durchgehender Linie */
 .footer {
-  margin-top: auto; /* Klebt den Footer an den unteren Rand ohne Überhang */
-  padding-top: var(--space-6);
-  padding-bottom: var(--space-2);
+  width: 100%;
+  margin-top: auto;
   border-top: 1px solid var(--color-border-subtle);
+  background-color: var(--color-surface-page);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-6);
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   text-align: center;
+}
+
+.footer-inner p {
+  margin: 0;
 }
 </style>
