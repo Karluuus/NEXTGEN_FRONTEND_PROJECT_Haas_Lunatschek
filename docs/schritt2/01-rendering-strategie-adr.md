@@ -73,10 +73,56 @@ Wir wählen **Option 2 (SSG via `prerender: true` in `nuxt.config.ts`)**. Da Spe
 
 ## 3. Session-Detailseiten (Person 2)
 
-<!-- Person 2 -->
+### Kontext
+
+Die Konferenzplattform umfasst 20 eigenständige Detailseiten unter `/sessions/[id]`. Jede Seite präsentiert ausführliche Abstracts, Zeit- und Raumangaben sowie bidirektionale Verlinkungen zu den Speaker-Profilen. Im dynamischen Konferenzablauf können sich Raumbelegungen oder Zeitpläne kurzfristig verschieben (z. B. Raumtausch wegen hoher Teilnehmerzahl). Gleichzeitig müssen Detailseiten für Suchmaschinen crawlbar und barrierefrei über Direkteinstiege erreichbar sein.
+
+### Betrachtete Optionen
+
+- **Option 1: Reines Static Site Generation (SSG via `prerender: true`)**  
+  Alle 20 Routen werden während des Build-Prozesses starr vorkompiliert.  
+  _Vorteil:_ Minimale Serverkosten und direkte Bereitstellung über Edge-CDNs.  
+  _Nachteil:_ Fehlende Flexibilität bei Programmänderungen. Jede Raum- oder Zeitkorrektur am Eventtag würde einen vollständigen CI/CD-Rebuild und Re-Deployment der gesamten Plattform erzwingen.
+- **Option 2: Incremental Static Regeneration via SWR (`swr: 60`) (Gewählt)**  
+  Detailseiten werden bei Abruf gerendert, im Cache zwischengespeichert und im Hintergrund alle 60 Sekunden revalidiert (Stale-While-Revalidate).  
+  _Vorteil:_ Besucher erhalten sofort vorberechnetes HTML mit exzellentem First Contentful Paint. Ändern sich Daten im Hintergrund, erneuert die Nitro-Engine die gecachte Seite ohne Downtime oder Neukompilierung der Anwendung.  
+  _Nachteil:_ Innerhalb des 60-Sekunden-Cache-Fensters können Clients kurzzeitig noch den vorangegangenen Datenstand sehen.
+
+### Entscheidung
+
+Wir wählen **Option 2 (ISR/SWR via `swr: 60` in `nuxt.config.ts`)**. Dies bietet den optimalen Ausgleich zwischen statischer Ladeperformance, vollständiger Suchmaschinen-Indexierbarkeit und der nötigen Agilität für kurzfristige Konferenz-Programmänderungen.
+
+### Konsequenzen
+
+- In `nuxt.config.ts` gilt für `/sessions/**` die Regel `{ swr: 60 }`.
+- HTML wird vollständig serverseitig ausgeliefert, inklusive aller Speaker-Referenzen.
+- Kurzfristige redaktionelle Korrekturen werden ohne Gesamtbuild zeitnah im Cache aktualisiert.
 
 ---
 
 ## 4. "Mein Programm"-Dashboard (Person 2)
 
-<!-- Person 2 -->
+### Kontext
+
+Unter der Route `/mein-programm` verwalten Teilnehmende ihren individuellen Konferenzplan. Die Auswahl erfolgt über die Lesezeichen-Funktion („Vormerken“) auf Session-Karten und Detailseiten. Die Daten existieren ausschließlich im privaten Web-Storage des jeweiligen Client-Endgeräts.
+
+### Betrachtete Optionen
+
+- **Option 1: Server-Side Rendering (SSR) mit Server-Sessions**  
+  Der Server verwaltet Benutzer-IDs in einer Datenbank und rendert den persönlichen Zeitplan vor der HTTP-Auslieferung.  
+  _Vorteil:_ Fertig generiertes HTML direkt vom Server.  
+  _Nachteil:_ Widerspricht der Anforderung eines leichtgewichtigen, datensparsamen Frontends ohne Backend-Infrastruktur. Ein Node.js-Server kann den lokalen `localStorage` des Browsers zur Render-Zeit nicht auslesen, was ohne aufwendige Auth-Architektur unweigerlich zu Hydration-Mismatch-Fehlern führen würde.
+- **Option 2: Client-Side Rendering (CSR via `ssr: false`) mit reaktiver ID-Persistenz (Gewählt)**  
+  Für `/mein-programm` wird das serverseitige Vorrendern deaktiviert. Das Composable `useSchedule` rehydriert die gespeicherten Session-IDs clientseitig und verknüpft sie mit dem Gesamtdatensatz.  
+  _Vorteil:_ Keine SSR-Hydration-Fehler. Vollkommen datenschutzfreundlich und offline-tauglich, da keine persönlichen Nutzerdaten an externe Server übertragen werden. Das Laden der gespeicherten IDs erzeugt null Serverlast.  
+  _Nachteil:_ Kein vorgerendertes Server-HTML (für einen privaten, nutzerspezifischen Bookmark-Bereich jedoch SEO-irrelevant).
+
+### Entscheidung
+
+Wir wählen **Option 2 (CSR via `ssr: false` in `nuxt.config.ts`)**. Da das Feature ausschließlich clientseitige Präferenzen aus dem `localStorage` aggregiert, ist reines Client-Rendering die stabilste und konsistenteste Lösung.
+
+### Konsequenzen
+
+- Die Route `/mein-programm` ist in `nuxt.config.ts` mit `{ ssr: false }` belegt.
+- Das Composable `useSchedule` steuert Rehydration und Mutations-Synchronisation im Browser.
+- Gespeicherte Sessions bleiben auch bei vollständigem Page-Reload verlässlich erhalten.
