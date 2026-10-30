@@ -104,7 +104,7 @@ Wir wählen **Option 2 (ISR/SWR via `swr: 60` in `nuxt.config.ts`)**. Dies biete
 
 ### Kontext
 
-Unter der Route `/mein-programm` verwalten Teilnehmende ihren individuellen Konferenzplan. Die Auswahl erfolgt über die Lesezeichen-Funktion („Vormerken“) auf Session-Karten und Detailseiten. Die Daten existieren ausschließlich im privaten Web-Storage des jeweiligen Client-Endgeräts.
+Unter der Route `/schedule` verwalten Teilnehmende ihren individuellen Konferenzplan. Die Auswahl erfolgt über die Lesezeichen-Funktion („Vormerken“) auf Session-Karten und Detailseiten. Die Daten existieren ausschließlich im privaten Web-Storage des jeweiligen Client-Endgeräts.
 
 ### Betrachtete Optionen
 
@@ -123,6 +123,6 @@ Wir wählen **Option 2 (CSR via `ssr: false` in `nuxt.config.ts`)**. Da das Feat
 
 ### Konsequenzen
 
-- Die Route `/mein-programm` ist in `nuxt.config.ts` mit `{ ssr: false }` belegt.
+- Die Route `/schedule` ist in `nuxt.config.ts` mit `{ ssr: false }` belegt.
 - Das Composable `useSchedule` steuert Rehydration und Mutations-Synchronisation im Browser.
 - Gespeicherte Sessions bleiben auch bei vollständigem Page-Reload verlässlich erhalten.
