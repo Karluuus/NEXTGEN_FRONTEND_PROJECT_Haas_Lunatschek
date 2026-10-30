@@ -5,6 +5,7 @@ import { computed } from 'vue'
 import { useConferenceData } from '~~/composables/useConferenceData'
 import BaseCard from '~~/components/ui/BaseCard.vue'
 import BaseBadge from '~~/components/ui/BaseBadge.vue'
+import BookmarkButton from '~~/components/schedule/BookmarkButton.vue'
 
 const route = useRoute()
 const sessionId = route.params.id as string
@@ -43,6 +44,7 @@ const formatDay = (dateStr: string) => {
             <BaseBadge variant="level">{{ session.level }}</BaseBadge>
             <BaseBadge>{{ session.format }}</BaseBadge>
           </div>
+          <BookmarkButton :session-id="session.id" />
         </div>
 
         <h1 class="session-title">{{ session.title }}</h1>

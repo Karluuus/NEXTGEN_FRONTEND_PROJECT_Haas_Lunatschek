@@ -3,6 +3,7 @@
 import type { Session } from "~~/types/conference";
 import BaseCard from "~~/components/ui/BaseCard.vue";
 import BaseBadge from "~~/components/ui/BaseBadge.vue";
+import BookmarkButton from '~~/components/schedule/BookmarkButton.vue'
 import { useConferenceData } from "~~/composables/useConferenceData";
 
 const props = defineProps<{
@@ -37,6 +38,8 @@ const formatDay = (dateStr: string) => {
         <BaseBadge variant="level">{{ session.level }}</BaseBadge>
         <BaseBadge>{{ session.format }}</BaseBadge>
       </div>
+
+      <BookmarkButton :session-id="session.id" />
     </header>
 
     <h2 class="session-title">
