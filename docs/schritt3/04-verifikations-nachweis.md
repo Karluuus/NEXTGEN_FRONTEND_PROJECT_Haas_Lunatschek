@@ -3,7 +3,7 @@
 ## 1. Testumgebung & Methodik
 Die Verifikation der Offline-Fähigkeiten und Service-Worker-Implementierung erfolgte in einer Produktionsumgebung (`npm run build` gefolgt von `npm run preview`) unter Google Chrome DevTools. Zur Validierung wurden zwei Prüfverfahren kombiniert:
 1. **Network-Tab Offline-Simulation:** Gezielte Trennung der Netzwerkverbindung zur Überprüfung der Caching-Regeln (Cache-First für App-Shell/Assets, Stale-While-Revalidate für Konferenzdaten) und Rehydration von „Mein Programm“ (Szenarien i und ii).
-2. **Lighthouse PWA-Audit:** Automatisierte Analyse bezüglich Installierbarkeit, Manifest-Validität, Service-Worker-Registrierung und Viewport-Konfiguration.
+2. **DevTools PWA-Prüfung & Lighthouse-Audit:** Analyse der PWA-Kriterien im Application-Tab (Installierbarkeit, Manifest-Validität, Service-Worker-Registrierung) sowie Lighthouse-Audit der Basismetriken (Best Practices: 100 %, Accessibility: 90 %, SEO: 82 %).
 
 ---
 
@@ -13,12 +13,12 @@ Die Verifikation der Offline-Fähigkeiten und Service-Worker-Implementierung erf
 ![DevTools Offline Network-Tab](./assets/offline-network.png)
 * *Beobachtung:* Nach Trennung der Verbindung werden sämtliche Ressourcen (`/`, `/schedule`, JS-Chunks, CSS-Tokens und `conference-data.json`) transparent aus dem Service Worker Cache bezogen. Die Spalte *Size* weist den Ursprung `(ServiceWorker)` aus. Die Ladezeit liegt unter 40 ms.
 
-### B. Lighthouse PWA-Audit
-![Lighthouse PWA Audit](./assets/lighthouse-pwa.png)
-* *Ergebnis:* Die Anwendung besteht alle PWA-Prüfungen:
-  * Installierbarkeit gegeben (Web App Manifest vorhanden, Icons in 192px und 512px, Start-URL definiert).
-  * Service Worker erfolgreich registriert und antwortet mit Status 200 im Offline-Zustand.
-  * Theme-Color und Apple-Touch-Icons konfiguriert.
+### B. PWA- & Lighthouse-Validierung
+![Lighthouse Audit & PWA Status](./assets/lighthouse-pwa.png)
+* *Ergebnis:* Die Anwendung erfüllt alle Kernkriterien:
+  * Installierbarkeit und Manifest im Application-Tab verifiziert (Name, Start-URL `/`, Theme-Color `#166534` und Icons in 192px sowie 512px).
+  * Service Worker erfolgreich registriert (`activated and is running`) und beantwortet Offline-Anfragen mit Status 200.
+  * Lighthouse-Audit belegt Best Practices mit 100 %, Barrierefreiheit mit 90 % und SEO mit 82 %.
 
 ---
 
