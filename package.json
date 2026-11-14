@@ -15,7 +15,7 @@
     "vue-router": "^5.3.1"
   },
   "devDependencies": {
-    "@vite-pwa/nuxt": "^1.0.7"
+    "@vite-pwa/nuxt": "^1.1.1"
   },
   "allowScripts": {
     "esbuild@0.28.2": true

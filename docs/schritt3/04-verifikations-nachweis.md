@@ -9,12 +9,15 @@ Die Verifikation der Offline-Fähigkeiten und Service-Worker-Implementierung erf
 
 ## 2. Testergebnisse & Belege
 
-### A. Chrome DevTools Network-Analyse (Szenario i & ii)
+### A. Chrome DevTools Network-Analyse (Szenario i & ii & iii)
 ![DevTools Offline Network-Tab](./assets/offline-network.png)
 * *Beobachtung:* Nach Trennung der Verbindung werden sämtliche Ressourcen (`/`, `/schedule`, JS-Chunks, CSS-Tokens und `conference-data.json`) transparent aus dem Service Worker Cache bezogen. Die Spalte *Size* weist den Ursprung `(ServiceWorker)` aus. Die Ladezeit liegt unter 40 ms.
 
+![DevTools Offline Erstbesuch](./assets/offline-erstbesuch.png)
+* *Beobachtung:* Im frischen Inkognito-Fenster ohne vorigen Service-Worker-Installationslauf schlägt der initiale Dokument-Request erwartungsgemäß mit `ERR_INTERNET_DISCONNECTED` fehl.
+* 
 ### B. PWA- & Lighthouse-Validierung
-![Lighthouse Audit & PWA Status](./assets/lighthouse-pwa.png)
+![Lighthouse Audit & PWA Status](./assets/Lighthouse_Report-1.png)
 * *Ergebnis:* Die Anwendung erfüllt alle Kernkriterien:
   * Installierbarkeit und Manifest im Application-Tab verifiziert (Name, Start-URL `/`, Theme-Color `#166534` und Icons in 192px sowie 512px).
   * Service Worker erfolgreich registriert (`activated and is running`) und beantwortet Offline-Anfragen mit Status 200.

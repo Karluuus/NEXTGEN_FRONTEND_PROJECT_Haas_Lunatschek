@@ -25,6 +25,8 @@ Wir entscheiden uns für **Option C**:
 2. **Konferenzdaten (`conference-data.json`):** Stale-While-Revalidate. Der Nutzer sieht sofort den lokalen Datenbestand. Im Hintergrund wird bei Netzempfang geprüft, ob Änderungen vorliegen, und der Cache transparent aktualisiert.
 3. **Persönliches Programm:** Die App-Shell lädt offline via Service Worker; die gespeicherten Favoriten-IDs werden aus dem `localStorage` rehydriert.
 
+Dieses Protokoll baut auf `docs/schritt2/01-rendering-strategie-adr.md` auf (`/speakers/**` via SSG `prerender: true`, `/sessions/**` via `swr: 60`, `/schedule` via CSR `ssr: false`). Um in Schritt 3 die Offline-Fähigkeit der PWA zu gewährleisten, wurden in `nuxt.config.ts` die Routen `/` und `/schedule` zusätzlich über `nitro.prerender.routes` als statische App-Shells vorgerendert, damit Workbox sie per `globPatterns` precachen kann. Die Aktualität der Programmdaten auf `/` bleibt dadurch gewahrt, dass `useConferenceData.ts` die `conference-data.json` clientseitig nachlädt und über die Workbox-Regel `StaleWhileRevalidate` aktuell hält.
+
 ---
 
 ## 4. Konsequenzen

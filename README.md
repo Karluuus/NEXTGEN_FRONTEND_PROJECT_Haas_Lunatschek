@@ -8,6 +8,8 @@ Make sure to install dependencies:
 
 ```bash
 npm install
+
+npm i @vite-pwa/nuxt
 ```
 
 ## Development Server

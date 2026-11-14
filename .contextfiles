@@ -1,0 +1,10 @@
+# Unnötige Ordner ausschließen
+!node_modules/
+!.nuxt/
+!.output/
+!dist/
+
+# Lockfiles und Logs ausschließen
+!package-lock.json
+!yarn.lock
+!*.log

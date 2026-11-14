@@ -51,7 +51,7 @@ export default defineNuxtConfig({
       cleanupOutdatedCaches: true,
       runtimeCaching: [
         {
-          // 1. Statische Assets & Stylesheets: Cache-First
+          // 1. Statische Assets & Stylesheets: Cache-First (Aufgabe Person 1 / Konzept 2.A)
           urlPattern: ({ request }: any) =>
             request.destination === "style" ||
             request.destination === "script" ||
@@ -66,7 +66,7 @@ export default defineNuxtConfig({
           },
         },
         {
-          // 2. Bilder & Icons: Cache-First
+          // 2. Bilder & Icons: Cache-First (Aufgabe Person 1 / Konzept 2.A)
           urlPattern: ({ request }: any) => request.destination === "image",
           handler: "CacheFirst",
           options: {

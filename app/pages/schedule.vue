@@ -1,4 +1,4 @@
-<!-- app/pages/mein-programm.vue -->
+<!-- app/pages/schedule.vue -->
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useSchedule } from '~~/composables/useSchedule'

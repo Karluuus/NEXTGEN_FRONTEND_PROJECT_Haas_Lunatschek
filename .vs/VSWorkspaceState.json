@@ -1,10 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\app",
+    "\\app\\pages",
+    "\\composables",
     "\\docs",
     "\\docs\\schritt2",
     "\\docs\\schritt3"
   ],
-  "SelectedNode": "\\docs\\schritt3\\AI-LOG-Haas.md",
+  "SelectedNode": "\\docs\\schritt3\\03-entscheidungsprotokoll.md",
   "PreviewInSolutionExplorer": false
 }
